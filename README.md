@@ -1,6 +1,7 @@
 # DOMEventListener
 > Subscripe on DOM elements, trigger methods when they change
 
+> `DOMEventListener` can operate without database or whatever database you want.
 
 ## Usage
 > Example: _Subscribing on the stackoverflow feed_:
