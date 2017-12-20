@@ -5,6 +5,7 @@ from domeventlistener.utils import unidiff_output
 
 
 EVENT_CHANGED = 'changed'
+EVENT_EMPTIED = 'emptied'
 
 
 class Listener(object):
@@ -23,13 +24,23 @@ class Listener(object):
         self.read_element = read_element
         self.write_element = write_element
         self.session = Session()
-        self.element_str = None
+        self.element_str = str(self.find_element())
+
+    def find_element(self):
+        resp = self.session.get(self.domain)
+        document = BeautifulSoup(resp.text, 'html.parser')
+
+        return document.select(self.query)
 
     def read_element_str(self):
-        return str(self.element_str) if not self.read_element\
-                else self.read_element()
+        ''' fetch stored old element '''
+
+        return self.element_str if not self.read_element\
+            else self.read_element()
 
     def write_element_str(self, element_str):
+        ''' write to store '''
+
         if not self.write_element:
             self.element_str = str(element_str)
         else:
@@ -38,11 +49,9 @@ class Listener(object):
     def poll_change(self):
         ''' Returns a tuple (has_changed, new_element_str) '''
 
-        resp = self.session.get(self.domain)
-        document = BeautifulSoup(resp.text, 'html.parser')
-        _element = str(document.select(self.query))
+        new_element = self.find_element()
 
-        return _element != self.read_element_str(), _element
+        return str(new_element) != self.read_element_str(), str(new_element)
 
     def start(self, sleep_time=5):
         while True:
@@ -51,7 +60,7 @@ class Listener(object):
             if has_changed:
                 if self.event_handler:
                     self.event_handler(
-                        EVENT_CHANGED,
+                        EVENT_CHANGED if new_element_str else EVENT_EMPTIED,
                         unidiff_output(
                             self.read_element_str(),
                             new_element_str
