@@ -58,14 +58,13 @@ class Listener(object):
             has_changed, new_element_str = self.poll_change()
 
             if has_changed:
-                if self.event_handler:
-                    self.event_handler(
-                        EVENT_CHANGED if new_element_str else EVENT_EMPTIED,
-                        unidiff_output(
-                            self.read_element_str(),
-                            new_element_str
-                        )
+                self.event_handler(
+                    EVENT_CHANGED if new_element_str else EVENT_EMPTIED,
+                    unidiff_output(
+                        self.read_element_str(),
+                        new_element_str
                     )
+                ) if self.event_handler else None
 
                 self.write_element_str(new_element_str)
                 time.sleep(sleep_time)
