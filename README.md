@@ -58,3 +58,15 @@
         write_element=write_element
     )
     ...
+
+## Installation
+> Install with pip:
+
+    pip install DOMEventListener
+
+
+> Install by cloning down:
+
+    git clone <this-project>
+    cd <this-project>
+    python setup.py install
