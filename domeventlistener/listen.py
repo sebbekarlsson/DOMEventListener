@@ -40,17 +40,24 @@ class Listener(object):
     def on_event(self, event_type, data):
         return self.event_handler(event_type, data)
 
+    def poll_change(self):
+        ''' Returns a tuple (has_changed, new_element_str) '''
+
+        resp = self.session.get(self.domain)
+        document = BeautifulSoup(resp.text, 'html.parser')
+        _element = str(document.select(self.query))
+
+        return _element != self.read_element_str(), _element
+
     def start(self, sleep_time=5):
         while True:
-            resp = self.session.get(self.domain)
-            document = BeautifulSoup(resp.text, 'html.parser')
-            _element = document.select(self.query)
+            has_changed, new_element_str = self.poll_change()
 
-            if str(_element) != self.read_element_str():
+            if has_changed:
                 self.on_event(
                     EVENT_CHANGED,
-                    unidiff_output(self.read_element_str(), str(_element))
+                    unidiff_output(self.read_element_str(), new_element_str)
                 )
 
-            self.write_element_str(str(_element))
-            time.sleep(sleep_time)
+                self.write_element_str(new_element_str)
+                time.sleep(sleep_time)
