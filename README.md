@@ -40,7 +40,7 @@
     
     
     def read_element():
-        return db.collections.find_one({'name': 'element'})
+        return str(db.collections.find_one({'name': 'element'})['element_str'])
 
     def write_element(element_str):
         return db.collections.update_one(
