@@ -5,6 +5,7 @@ setup(
     name='DOMEventListener',
     version='1.0',
     description='Subscripe on DOM elements, trigger methods when they change',
+    url='https://github.com/sebbekarlsson/DOMEventListener',
     install_requires=[
         'requests',
         'bs4'
