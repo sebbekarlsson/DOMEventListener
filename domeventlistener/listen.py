@@ -4,6 +4,9 @@ import time
 from domeventlistener.utils import unidiff_output
 
 
+EVENT_CHANGED = 'changed'
+
+
 class Listener(object):
 
     def __init__(self, domain, query, event_handler):
@@ -24,7 +27,7 @@ class Listener(object):
 
             if str(_element) != str(self.element):
                 self.on_event(
-                    'changed',
+                    EVENT_CHANGED,
                     unidiff_output(str(self.element), str(_element))
                 )
 
