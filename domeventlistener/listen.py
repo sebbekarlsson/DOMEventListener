@@ -13,7 +13,7 @@ class Listener(object):
         self,
         domain,
         query,
-        event_handler,
+        event_handler=None,
         read_element=None,
         write_element=None
     ):
@@ -37,9 +37,6 @@ class Listener(object):
         else:
             return self.write_element(element_str)
 
-    def on_event(self, event_type, data):
-        return self.event_handler(event_type, data)
-
     def poll_change(self):
         ''' Returns a tuple (has_changed, new_element_str) '''
 
@@ -54,10 +51,14 @@ class Listener(object):
             has_changed, new_element_str = self.poll_change()
 
             if has_changed:
-                self.on_event(
-                    EVENT_CHANGED,
-                    unidiff_output(self.read_element_str(), new_element_str)
-                )
+                if self.event_handler:
+                    self.event_handler(
+                        EVENT_CHANGED,
+                        unidiff_output(
+                            self.read_element_str(),
+                            new_element_str
+                        )
+                    )
 
                 self.write_element_str(new_element_str)
                 time.sleep(sleep_time)
