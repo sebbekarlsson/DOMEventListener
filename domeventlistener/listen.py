@@ -26,10 +26,8 @@ class Listener(object):
         self.element_str = None
 
     def read_element_str(self):
-        if not self.read_element:
-            return str(self.element_str)
-
-        return self.read_element
+        return str(self.element_str) if not self.read_element\
+                else self.read_element()
 
     def write_element_str(self, element_str):
         if not self.write_element:

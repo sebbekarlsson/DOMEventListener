@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='DOMEventListener',
-    version='1.2',
+    version='1.3',
     description='Subscripe on DOM elements, trigger methods when they change',
     url='https://github.com/sebbekarlsson/DOMEventListener',
     install_requires=[
