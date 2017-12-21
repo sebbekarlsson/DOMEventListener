@@ -107,4 +107,4 @@
     ./test.sh
 
 ## License
-> License: [gpl-3.0][LICENSE.md]
+> License: [gpl-3.0](LICENSE.md)
