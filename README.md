@@ -105,10 +105,10 @@
     )
 
     pool = ListenPool()
-    
+     
     # deploy as many listeners as you want.
     # The "pool" will automaticaly start them once deployed using this method.
-    pool.deploy_listener(listener0)        
+    pool.deploy_listener(listener0) 
 
 ## CLI (Command line interface)
 ![cli.gif](cli.gif)
