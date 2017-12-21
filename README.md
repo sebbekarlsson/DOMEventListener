@@ -63,6 +63,7 @@
     ...
 
 ## Using with selenium + chromedriver
+> __NOTE: ! NOT TESTED YET !__  
 > You can set the chrome attribute to use selenium webdriver:
 
     ...
