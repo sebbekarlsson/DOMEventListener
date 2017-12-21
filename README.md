@@ -110,6 +110,10 @@
     # The "pool" will automaticaly start them once deployed using this method.
     pool.deploy_listener(listener0) 
 
+## Type of events
+* `changed` - the DOM was changed
+* `emptied` - the DOM is now empty / lost
+
 ## CLI (Command line interface)
 ![cli.gif](cli.gif)
 
