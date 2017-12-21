@@ -102,12 +102,25 @@
         query='a[title="Stars"]',
         event_handler=event_handler
     )
-
+    
     pool = ListenPool()
      
     # deploy as many listeners as you want.
     # The "pool" will automaticaly start them once deployed using this method.
     pool.deploy_listener(listener0) 
+
+## Using the domeventlistener in your application
+
+    from domeventlistener.listen import Listener
+
+    
+    listener = Listener(
+        domain='http://example.org',
+        query='h1'
+    )
+    
+    # boolean    string
+    has_changed, new_element_str = listener.poll_change()
 
 ## Type of events
 * `changed` - the DOM was changed
