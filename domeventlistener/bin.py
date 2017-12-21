@@ -18,6 +18,8 @@ listener = Listener(
     event_handler
 )
 
+listener.mount()
+
 
 def run():
     try:
