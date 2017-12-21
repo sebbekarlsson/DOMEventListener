@@ -73,3 +73,13 @@
     git clone <this-project>
     cd <this-project>
     python setup.py install
+
+## Development
+### Unit testing
+> First install:
+
+    pip install pytest pytest-cov
+
+> Run the tests:
+
+    ./test.sh

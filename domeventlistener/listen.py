@@ -12,23 +12,30 @@ class Listener(object):
 
     def __init__(
         self,
-        domain,
-        query,
+        domain=None,
+        query=None,
         event_handler=None,
+        document=None,
         read_element=None,
         write_element=None
     ):
         self.domain = domain
         self.query = query
         self.event_handler = event_handler
+        self.document = document
         self.read_element = read_element
         self.write_element = write_element
         self.session = Session()
-        self.element_str = str(self.find_element())
+        self.write_element_str(str(self.find_element()))
 
     def find_element(self):
-        resp = self.session.get(self.domain)
-        document = BeautifulSoup(resp.text, 'html.parser')
+        if self.document:
+            with open(self.document) as _file:
+                document = BeautifulSoup(_file.read(), 'html.parser')
+            _file.close()
+        else:
+            resp = self.session.get(self.domain)
+            document = BeautifulSoup(resp.text, 'html.parser')
 
         return document.select(self.query)
 
