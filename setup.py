@@ -3,14 +3,12 @@ from setuptools import setup
 
 setup(
     name='DOMEventListener',
-    version='1.6',
+    version='1.7',
     description='Subscripe on DOM elements, trigger methods when they change',
     url='https://github.com/sebbekarlsson/DOMEventListener',
     install_requires=[
         'requests',
-        'bs4',
-        'selenium==3.0.0',
-        'pyvirtualdisplay==0.2.1'
+        'bs4'
     ],
     packages=[
         'domeventlistener'

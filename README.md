@@ -105,3 +105,6 @@
 > Run the tests:
 
     ./test.sh
+
+## License
+> License: [gpl-3.0][LICENSE.md]
