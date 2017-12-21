@@ -23,6 +23,6 @@ listener.mount()
 
 def run():
     try:
-        listener.start()
+        listener.run()
     except KeyboardInterrupt():
         quit()

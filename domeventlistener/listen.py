@@ -3,13 +3,14 @@ from requests import Session
 from bs4 import BeautifulSoup
 import time
 from domeventlistener.utils import unidiff_output
+import threading
 
 
 EVENT_CHANGED = 'changed'
 EVENT_EMPTIED = 'emptied'
 
 
-class Listener(object):
+class Listener(threading.Thread):
 
     def __init__(
         self,
@@ -21,6 +22,7 @@ class Listener(object):
         read_element=None,
         write_element=None,
         chrome=None,
+        daemon=True
     ):
         self.domain = domain
         self.query = query
@@ -53,8 +55,9 @@ class Listener(object):
                 return self.chrome.find_element_by_css_selector(self.query)
 
         document = BeautifulSoup(htmlcontent, 'html.parser')
+        elements = document.select(self.query)
 
-        return document.select(self.query)[0]
+        return elements[0] if elements else None
 
     def read_element_str(self):
         ''' fetch stored old element '''
@@ -77,7 +80,7 @@ class Listener(object):
 
         return str(new_element) != self.read_element_str(), str(new_element)
 
-    def start(self, sleep_time=5):
+    def run(self, sleep_time=5):
         while True:
             has_changed, new_element_str = self.poll_change()
 

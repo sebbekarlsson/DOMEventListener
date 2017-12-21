@@ -12,6 +12,15 @@ def test_find_element():
 
     assert listener.find_element() is not None
 
+    listener = Listener(
+        domain='http://example.org/',
+        query='h1'
+    )
+
+    listener.mount()
+
+    assert listener.find_element() is not None
+
 
 def test_find_ugly_elements():
     for html in get_ugly_htmls():
