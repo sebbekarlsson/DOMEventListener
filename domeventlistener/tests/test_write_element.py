@@ -4,7 +4,7 @@ from domeventlistener.tests.mock import TEST_DOCUMENT_0
 
 def test_write_element():
     listener = Listener(
-        document=TEST_DOCUMENT_0,
+        document_path=TEST_DOCUMENT_0,
         query='#the-element'
     )
 

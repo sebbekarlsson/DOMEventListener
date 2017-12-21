@@ -1,5 +1,5 @@
 from domeventlistener.listen import Listener
-from domeventlistener.tests.mock import TEST_DOCUMENT_0
+from domeventlistener.tests.mock import TEST_DOCUMENT_0, get_ugly_htmls
 from bs4 import BeautifulSoup
 
 
@@ -8,7 +8,7 @@ CSS_QUERY = '#the-element'
 
 def test_poll_change_not_changed():
     listener = Listener(
-        document=TEST_DOCUMENT_0,
+        document_path=TEST_DOCUMENT_0,
         query=CSS_QUERY
     )
 
@@ -22,7 +22,7 @@ def test_poll_change_not_changed():
 
 def test_poll_change_changed():
     listener = Listener(
-        document=TEST_DOCUMENT_0,
+        document_path=TEST_DOCUMENT_0,
         query=CSS_QUERY
     )
 
@@ -66,3 +66,21 @@ def test_poll_change_changed():
             _file:
         _file.write(str(soup))
     _file.close()
+
+
+def test_poll_ugly_elements():
+    ugly_htmls = list(get_ugly_htmls())
+    index = 0
+
+    listener = Listener(
+        document=ugly_htmls[index],
+        query='#the-element'
+    )
+    listener.mount()
+    index += 1
+
+    for i in range(index, len(ugly_htmls)):
+        listener.document = ugly_htmls[i]
+        has_changed, element = listener.poll_change()
+
+        assert has_changed is True

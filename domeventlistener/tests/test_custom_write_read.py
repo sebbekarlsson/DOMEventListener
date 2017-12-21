@@ -44,7 +44,7 @@ def write_element(element_str):
 
 def test_element_found_on_init():
     listener = Listener(
-        document=TEST_DOCUMENT_0,
+        document_path=TEST_DOCUMENT_0,
         query='#the-element',
         read_element=read_element,
         write_element=write_element

@@ -16,6 +16,7 @@ class Listener(object):
         domain=None,
         query=None,
         event_handler=None,
+        document_path=None,
         document=None,
         read_element=None,
         write_element=None,
@@ -24,6 +25,7 @@ class Listener(object):
         self.domain = domain
         self.query = query
         self.event_handler = event_handler
+        self.document_path = document_path
         self.document = document
         self.read_element = read_element
         self.write_element = write_element
@@ -35,10 +37,12 @@ class Listener(object):
         return self.write_element_str(str(self.find_element()))
 
     def find_element(self):
-        if self.document:
-            with open(self.document) as _file:
+        if self.document_path:
+            with open(self.document_path) as _file:
                 htmlcontent = _file.read()
             _file.close()
+        elif self.document:
+            htmlcontent = self.document
         else:
             if not self.chrome:
                 resp = self.session.get(self.domain)
