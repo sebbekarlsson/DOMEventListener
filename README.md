@@ -86,6 +86,29 @@
     )
     ...
 
+## Pooling
+> Running multiple listeners at the same time:
+
+    from domeventlistener.listen import Listener
+    from domeventlistener.pool import ListenPool
+
+
+    # my event handler
+    def event_handler(event_type, data):
+        print(event_type, data)
+
+
+    listener0 = Listener(
+        domain='https://github.com/sebbekarlsson',
+        query='a[title="Stars"]',
+        event_handler=event_handler
+    )
+
+    pool = ListenPool()
+    
+    # deploy as many listeners as you want.
+    # The "pool" will automaticaly start them once deployed using this method.
+    pool.deploy_listener(listener0)        
 
 ## CLI (Command line interface)
 ![cli.gif](cli.gif)
