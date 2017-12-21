@@ -84,6 +84,9 @@
     ...
 
 
+## CLI (Command line interface)
+![cli.gif](cli.gif)
+
 ## Installation
 > Install with pip:
 
