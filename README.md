@@ -26,7 +26,7 @@
     listener.mount()
 
     try:
-        listener.start()
+        listener.run()
     except KeyboardInterrupt():
         quit()
 
