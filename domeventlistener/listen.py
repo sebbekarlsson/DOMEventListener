@@ -48,7 +48,12 @@ class Listener(threading.Thread):
         elif self.chrome:
             self.chrome.get(self.domain)
 
-            return self.chrome.find_element_by_css_selector(self.query)
+            try:
+                element = self.chrome.find_element_by_xpath(self.query)
+            except Exception:
+                element = self.chrome.find_element_by_css_selector(self.query)
+
+            return element.get_attribute('outerHTML')
         else:
             resp = self.session.get(self.domain)
             htmlcontent = resp.text
