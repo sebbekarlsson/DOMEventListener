@@ -35,9 +35,9 @@ def test_poll_change_changed():
     _file.close()
 
     soup = BeautifulSoup(htmlcontent, 'html.parser')
-    soup_elem = soup.select('#the-element')
+    soup_elem = soup.select('#the-element')[0]
 
-    soup_elem[0]['data-changed'] = 1
+    soup_elem['data-changed'] = 1
 
     with open(TEST_DOCUMENT_0, 'w') as\
             _file:
@@ -54,9 +54,9 @@ def test_poll_change_changed():
     _file.close()
 
     soup = BeautifulSoup(htmlcontent, 'html.parser')
-    soup_elem = soup.select('#the-element')
+    soup_elem = soup.select('#the-element')[0]
 
-    del soup_elem[0]['data-changed']
+    del soup_elem['data-changed']
 
     with open(TEST_DOCUMENT_0, 'w') as\
             _file:

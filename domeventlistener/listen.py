@@ -31,13 +31,15 @@ class Listener(object):
     def find_element(self):
         if self.document:
             with open(self.document) as _file:
-                document = BeautifulSoup(_file.read(), 'html.parser')
+                htmlcontent = _file.read()
             _file.close()
         else:
             resp = self.session.get(self.domain)
-            document = BeautifulSoup(resp.text, 'html.parser')
+            htmlcontent = resp.text
 
-        return document.select(self.query)
+        document = BeautifulSoup(htmlcontent, 'html.parser')
+
+        return document.select(self.query)[0]
 
     def read_element_str(self):
         ''' fetch stored old element '''
