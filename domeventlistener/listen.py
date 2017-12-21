@@ -45,14 +45,13 @@ class Listener(threading.Thread):
             _file.close()
         elif self.document:
             htmlcontent = self.document
-        else:
-            if not self.chrome:
-                resp = self.session.get(self.domain)
-                htmlcontent = resp.text
-            elif self.chrome:
-                self.chrome.get(self.domain)
+        elif self.chrome:
+            self.chrome.get(self.domain)
 
-                return self.chrome.find_element_by_css_selector(self.query)
+            return self.chrome.find_element_by_css_selector(self.query)
+        else:
+            resp = self.session.get(self.domain)
+            htmlcontent = resp.text
 
         document = BeautifulSoup(htmlcontent, 'html.parser')
         elements = document.select(self.query)
