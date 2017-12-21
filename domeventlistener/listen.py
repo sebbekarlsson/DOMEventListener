@@ -70,7 +70,7 @@ class Listener(threading.Thread):
         if not self.write_element:
             self.element_str = str(element_str)
         else:
-            return self.write_element(element_str)
+            self.write_element(element_str)
 
     def poll_change(self):
         ''' Returns a tuple (has_changed, new_element_str) '''
