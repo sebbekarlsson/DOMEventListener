@@ -62,6 +62,27 @@
     )
     ...
 
+## Using with selenium + chromedriver
+> You can set the chrome attribute to use selenium webdriver:
+
+    ...
+
+    mydriver = webdriver.Chrome(
+        executable_path=config['chrome_driver'],
+        chrome_options=chrome_options
+    )
+
+    listener = Listener(
+        'https://stackoverflow.com/questions',
+        '#mainbar',
+        event_handler,
+        read_element=read_element,
+        write_element=write_element,
+        chrome=mydriver # passing in my driver to use selenium + chromedriver
+    )
+    ...
+
+
 ## Installation
 > Install with pip:
 

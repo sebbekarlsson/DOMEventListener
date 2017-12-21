@@ -17,7 +17,8 @@ class Listener(object):
         event_handler=None,
         document=None,
         read_element=None,
-        write_element=None
+        write_element=None,
+        chrome=None,
     ):
         self.domain = domain
         self.query = query
@@ -26,6 +27,7 @@ class Listener(object):
         self.read_element = read_element
         self.write_element = write_element
         self.session = Session()
+        self.chrome = None
         self.write_element_str(str(self.find_element()))
 
     def find_element(self):
@@ -34,8 +36,13 @@ class Listener(object):
                 htmlcontent = _file.read()
             _file.close()
         else:
-            resp = self.session.get(self.domain)
-            htmlcontent = resp.text
+            if not self.chrome:
+                resp = self.session.get(self.domain)
+                htmlcontent = resp.text
+            elif self.chrome:
+                self.chrome.get(self.domain)
+
+                return self.chrome.find_element_by_css_selector(self.query)
 
         document = BeautifulSoup(htmlcontent, 'html.parser')
 

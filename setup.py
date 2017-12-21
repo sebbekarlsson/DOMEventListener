@@ -8,7 +8,9 @@ setup(
     url='https://github.com/sebbekarlsson/DOMEventListener',
     install_requires=[
         'requests',
-        'bs4'
+        'bs4',
+        'selenium==3.0.0',
+        'pyvirtualdisplay==0.2.1'
     ],
     packages=[
         'domeventlistener'
