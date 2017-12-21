@@ -32,7 +32,7 @@ class Listener(threading.Thread):
         self.read_element = read_element
         self.write_element = write_element
         self.session = Session()
-        self.chrome = None
+        self.chrome = chrome
         self.element_str = None
 
     def mount(self):

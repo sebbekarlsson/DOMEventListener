@@ -1,5 +1,7 @@
 #### joe made this: http://goel.io/joe
 
+domeventlistener/tests/config.json
+
 #### vim ####
 # Swap
 [._]*.s[a-v][a-z]
@@ -126,7 +128,8 @@ ENV/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -274,7 +277,8 @@ ENV/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*

@@ -139,5 +139,9 @@
 
     ./test.sh
 
+> To run thests with chromedriver + selenium
+
+    echo '{"chromedriver": "/path/to/chromedriver"}' > domeventlistener/tests/config.json
+
 ## License
 > License: [gpl-3.0](LICENSE.md)
