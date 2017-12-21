@@ -50,6 +50,10 @@ def test_element_found_on_init():
         write_element=write_element
     )
 
+    assert listener.read_element_str() is None
+
+    listener.mount()
+
     assert listener.read_element_str() is not None
 
     changed, element = listener.poll_change()

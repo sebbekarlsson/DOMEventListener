@@ -29,7 +29,10 @@ class Listener(object):
         self.write_element = write_element
         self.session = Session()
         self.chrome = None
-        self.write_element_str(str(self.find_element()))
+        self.element_str = None
+
+    def mount(self):
+        return self.write_element_str(str(self.find_element()))
 
     def find_element(self):
         if self.document:

@@ -8,4 +8,6 @@ def test_find_element():
         query='#the-element'
     )
 
+    listener.mount()
+
     assert listener.find_element() is not None

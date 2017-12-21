@@ -8,6 +8,8 @@ def test_read_element():
         query='#the-element'
     )
 
+    listener.mount()
+
     listener.find_element()
 
     assert isinstance(listener.read_element_str(), basestring)

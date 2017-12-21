@@ -12,6 +12,8 @@ def test_poll_change_not_changed():
         query=CSS_QUERY
     )
 
+    listener.mount()
+
     has_changed, element = listener.poll_change()
 
     assert has_changed is False
@@ -23,6 +25,8 @@ def test_poll_change_changed():
         document=TEST_DOCUMENT_0,
         query=CSS_QUERY
     )
+
+    listener.mount()
 
     has_changed, element = listener.poll_change()
 

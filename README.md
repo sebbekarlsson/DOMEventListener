@@ -22,6 +22,9 @@
         event_handler
     )
 
+    # mount it on the element
+    listener.mount()
+
     try:
         listener.start()
     except KeyboardInterrupt():

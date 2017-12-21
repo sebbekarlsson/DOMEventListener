@@ -8,6 +8,8 @@ def test_write_element():
         query='#the-element'
     )
 
+    listener.mount()
+
     listener.find_element()
 
     listener.write_element_str(listener.read_element_str())

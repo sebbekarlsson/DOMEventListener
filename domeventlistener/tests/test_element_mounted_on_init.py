@@ -8,4 +8,8 @@ def test_element_found_on_init():
         query='#the-element'
     )
 
+    assert listener.element_str is None
+
+    listener.mount()
+
     assert listener.element_str is not None
