@@ -81,8 +81,21 @@ class Listener(threading.Thread):
         ''' Returns a tuple (has_changed, new_element_str) '''
 
         new_element = self.find_element()
+        old_element = self.read_element_str()
 
-        return str(new_element) != self.read_element_str(), str(new_element)
+        try:
+            new_element = new_element.encode('utf-8', 'ignore')
+        except UnicodeDecodeError:
+            new_element = new_element.decode('utf-8').encode('utf-8', 'ignore')
+
+        try:
+            old_element = old_element.encode('utf-8', 'ignore')
+        except UnicodeDecodeError:
+            old_element = old_element.decode('utf-8').encode('utf-8', 'ignore')
+
+        changed = new_element != old_element
+
+        return changed, new_element
 
     def run(self, sleep_time=5):
         while True:
